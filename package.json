@@ -1,6 +1,6 @@
 {
   "name": "express-example",
-  "version": "0.0.0-development",
+  "version": "1.0.0",
   "description": "",
   "scripts": {
     "build": "rm -rf dist && tsc -p .",
