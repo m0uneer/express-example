@@ -1,0 +1,96 @@
+{
+  "name": "express-example",
+  "version": "0.0.0-development",
+  "description": "",
+  "scripts": {
+    "build": "rm -rf dist && tsc -p .",
+    "postbuild": "if [ $(find src -type f -not -name '*.ts' | wc -l) -gt 0 ]; then cpy '**/*' '!**/*.ts' ../dist --cwd=src --no-overwrite --parents; fi",
+    "start": "node dist/index.js -debug",
+    "start:ts-node": "ts-node ./src/index.ts -debug",
+    "inspect": "node --inspect=9777 -r ts-node/register ./src/index.ts -debug",
+    "inspect-brk": "node --inspect-brk=9777 -r ts-node/register ./src/index.ts -debug",
+    "test": "mocha -r ts-node/register src/**/*.spec.ts",
+    "commit": "git-cz",
+    "lint:fix": "tslint --project tsconfig.json --fix",
+    "semantic-release": "semantic-release --no-ci",
+    "semantic-release:preview-only": "semantic-release --dry-run"
+  },
+  "engines": {
+    "node": "8.11.3",
+    "npm": "5.6.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.4",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@semantic-release/changelog": "^3.0.6",
+    "@semantic-release/commit-analyzer": "^6.3.3",
+    "@semantic-release/git": "^7.0.18",
+    "@semantic-release/npm": "^5.3.5",
+    "@semantic-release/release-notes-generator": "^7.3.5",
+    "@types/chai": "^4.1.7",
+    "@types/cookie-parser": "^1.4.2",
+    "@types/express": "^4.0.39",
+    "@types/ioredis": "^4.14.3",
+    "@types/lodash": "^4.14.149",
+    "@types/lusca": "^1.6.1",
+    "@types/mocha": "^2.2.48",
+    "@types/node": "^8.10.49",
+    "@types/sequelize": "^4.28.8",
+    "@types/uuidjs": "^3.6.0",
+    "chai": "^4.2.0",
+    "commitizen": "^4.0.3",
+    "cpy-cli": "^3.0.0",
+    "cz-conventional-changelog": "^3.0.2",
+    "dotenv-cli": "^3.1.0",
+    "husky": "^3.1.0",
+    "lint-staged": "^9.5.0",
+    "mocha": "^5.0.0",
+    "semantic-release": "^16.0.1",
+    "ts-loader": "^6.0.2",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.20.1",
+    "tslint-eslint-rules": "^5.4.0",
+    "typescript": "^3.6.3"
+  },
+  "dependencies": {
+    "@djaty/djaty-nodejs": "^1.1.2",
+    "@godaddy/terminus": "^4.3.1",
+    "@tsed/common": "5.31.2",
+    "@tsed/core": "5.31.2",
+    "@tsed/di": "5.31.2",
+    "ajv": "^5.2.0",
+    "ajv-errors": "^1.0.0",
+    "ajv-keywords": "^2.0.0",
+    "ajv-merge-patch": "^3.0.0",
+    "aws-lambda": "^0.1.2",
+    "aws-serverless-express": "^3.3.6",
+    "body-parser": "^1.18.2",
+    "connect-redis": "^3.4.2",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "ioredis": "^4.14.1",
+    "lambda-warmer": "^1.2.1",
+    "lodash": "^4.17.15",
+    "lusca": "^1.6.1",
+    "reflect-metadata": "^0.1.13",
+    "sequelize": "^4.34.0",
+    "uuidjs": "^4.2.4",
+    "winston": "^3.2.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:m0uneer/express-example.git"
+  },
+  "publishConfig": {
+    "access": "restricted"
+  }
+}

@@ -1,0 +1,32 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 10
+
+    commands:
+      # Install dependencies needed for running tests
+      - npm install
+
+      # Upgrade AWS CLI to the latest version
+      - pip3 install --upgrade awscli
+
+  pre_build:
+    commands:
+      # Discover and run unit tests in the 'tests' directory
+      - npm test
+
+  build:
+    commands:
+      # Build Code
+      - npm run build
+
+      - export BUCKET=lambda-deployment-artifacts-express-example
+      - aws cloudformation package --template-file template.yaml --s3-bucket $BUCKET --output-template-file outputtemplate.yml
+
+artifacts:
+  type: zip
+  files:
+    - template.yml
+    - outputtemplate.yml

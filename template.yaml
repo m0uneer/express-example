@@ -1,0 +1,68 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: Express Example
+
+Globals:
+  Api:
+    # Logging, Metrics, Throttling, and all other Stage settings
+    MethodSettings: [{
+        # Turn on Info logging
+        "LoggingLevel": "INFO",
+
+        # Trace-level Logging
+        "DataTraceEnabled": True,
+
+        # On all Paths & methods
+        "ResourcePath": "/*",
+        "HttpMethod": "*",
+    }]
+    # Allows an application running locally on port 8080 to call this API
+    Cors:
+      AllowMethods: "'OPTIONS,POST'"
+      AllowHeaders: "'Content-Type'"
+      AllowOrigin: "'*'"
+
+Resources:
+  ExpressExampleFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: "ExpressExampleLambdaFunction"
+      Handler: dist/lambda.handler
+      Runtime: nodejs10.x
+      MemorySize: 128
+      Timeout: 30
+      CodeUri: ./
+      Environment:
+        Variables:
+          NODE_ENV: production
+      Events:
+        WarmingSchedule:
+          Type: Schedule
+          Properties:
+            Schedule: rate(5 minutes)
+            Input: '{ "warmer":true,"concurrency":3 }'
+        ExpressExampleApi:
+          Type: Api
+          Properties:
+            Path: "/{proxy+}"
+            Method: any
+      Policies:
+        - LambdaInvokePolicy:
+            FunctionName: "ExpressExampleLambdaFunction"
+        - Statement:
+            - Effect: Allow
+              Action:
+                - "lambda:InvokeFunction"
+              Resource:
+                Fn::Join:
+                  - ""
+                  - - "arn:aws:lambda:us-east-1:"
+                    - Ref: AWS::AccountId
+                    - ":function:"
+                    - "ExpressExampleLambdaFunction"
+                    - ":$LATEST"
+
+  ApiGatewayLoggingAccount:
+    Type: AWS::ApiGateway::Account
+    Properties:
+      CloudWatchRoleArn: "arn:aws:iam::000000000000:role/xxxxxxxxxxxxxxxxxxxx"
