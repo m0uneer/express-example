@@ -65,7 +65,7 @@
     "ajv-errors": "^1.0.0",
     "ajv-keywords": "^2.0.0",
     "ajv-merge-patch": "^3.0.0",
-    "aws-lambda": "^0.1.2",
+    "aws-lambda": "^1.0.5",
     "aws-serverless-express": "^3.3.6",
     "body-parser": "^1.18.2",
     "connect-redis": "^3.4.2",
