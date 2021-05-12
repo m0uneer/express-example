@@ -59,7 +59,7 @@
     "@djaty/djaty-nodejs": "^1.1.2",
     "@godaddy/terminus": "^4.3.1",
     "@tsed/common": "5.31.2",
-    "@tsed/core": "5.31.2",
+    "@tsed/core": "5.65.7",
     "@tsed/di": "5.31.2",
     "ajv": "^5.2.0",
     "ajv-errors": "^1.0.0",
