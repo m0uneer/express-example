@@ -61,7 +61,7 @@
     "@tsed/common": "5.31.2",
     "@tsed/core": "5.31.2",
     "@tsed/di": "5.31.2",
-    "ajv": "^5.2.0",
+    "ajv": "^6.12.3",
     "ajv-errors": "^1.0.0",
     "ajv-keywords": "^2.0.0",
     "ajv-merge-patch": "^3.0.0",
